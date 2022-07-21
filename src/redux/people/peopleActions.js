@@ -1,10 +1,10 @@
 import axios from "axios"
 
-export const searchPeople = (position = '', sortby = '', sortdirection = '') => async (dispatch) => {
+export const searchPeople = (position = '', sortby = '', sortdirection = '', name = '') => async (dispatch) => {
     try {
         dispatch({ type: 'PEOPLE_SEARCH_REQUEST' })
     
-        const { data } = await axios.get(`people?position=${position}&sortby=${sortby}&sortdirection=${sortdirection}`)
+        const { data } = await axios.get(`people?position=${position}&sortby=${sortby}&sortdirection=${sortdirection}&name=${name}`)
 
         dispatch({
             type: 'PEOPLE_SEARCH_SUCCESS',
