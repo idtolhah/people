@@ -18,33 +18,36 @@ const Content = () => {
     }, [])
 
     return (
-        <div className="flex flex-col gap-[15px]">
-            <div className='flex justify-between text-sm text-gray-700'>
+        <div className="flex flex-col text-sm text-gray-700 gap-[15px]">
+            <div className='flex justify-between'>
                 <span>Results:</span>
                 <span>Showing {data?.length} users</span>
             </div>
             {loading ? (
                 <span>Loading....</span>
-            ) : 
-                data?.map(e => {
-                    return (
-                        <Link key={e.id} to={`/${e.id}`} className="hover:shadow-lg">
-                            <ShadowWrapper roundSize="default">
-                                <div className="flex items-center gap-[10px]">
-                                    <img className="w-[64px] rounded-full" src={avatar} alt="Avatar" />
-                                    <div className="flex grow flex-col">
-                                        <span className="text-lg font-bold">{e.name}</span>
-                                        <span className="text-sm italic">{e.profile?.position}</span>
-                                    </div>
-                                    <div className="flex flex-col justify-between items-end gap-[5px]">
-                                        <span className="text-xs">{e.id}</span>
-                                        <span className="text-xs">{moment(e.createdAt).format('D MMM YYYY')}</span>
-                                    </div>
-                                </div>
-                            </ShadowWrapper>
-                        </Link>
-                    )
-                })
+            ) : (
+                    data?.length > 0 ?
+                        data?.map(e => {
+                            return (
+                                <Link key={e.id} to={`/${e.id}`} className="hover:shadow-lg">
+                                    <ShadowWrapper roundSize="default">
+                                        <div className="flex items-center gap-[10px]">
+                                            <img className="w-[64px] rounded-full" src={avatar} alt="Avatar" />
+                                            <div className="flex grow flex-col">
+                                                <span className="text-lg font-bold">{e.name}</span>
+                                                <span className="text-sm italic">{e.profile?.position}</span>
+                                            </div>
+                                            <div className="flex flex-col justify-between items-end gap-[5px]">
+                                                <span className="text-xs">{e.id}</span>
+                                                <span className="text-xs">{moment(e.createdAt).format('D MMM YYYY')}</span>
+                                            </div>
+                                        </div>
+                                    </ShadowWrapper>
+                                </Link>
+                            )
+                        }) 
+                    : <span>No Data</span>
+                )
             }
         </div>
     )
